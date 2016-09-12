@@ -22,7 +22,7 @@ Module.register("MMM-Hue", {
     },
     // Define required scripts.
     getScripts: function () {
-        return ["https://code.jquery.com/jquery-2.2.3.min.js"];
+        return [this.file("js/jquery.js")];
     },
     getStyles: function () {
         return ["font-awesome.css"];
