@@ -20,6 +20,7 @@
     <Compile Include="MMM-Hue.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="js\" />
     <Folder Include="typings\" />
     <Folder Include="typings\globals\" />
     <Folder Include="typings\globals\node\" />
