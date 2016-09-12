@@ -31,7 +31,6 @@ Module.register("MMM-Hue", {
     start: function () {
         var result = false;
         var url = "http://" + this.config.bridgeip + "/api/" + this.config.userid + "/" + this.config.lightsorgroups;
-        alert(url);
         this.getData();
         setInterval(() => {
             this.getData();
