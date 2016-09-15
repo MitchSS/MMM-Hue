@@ -13,9 +13,9 @@ Module.register("MMM-Hue", {
     defaults: {
         text: "MMM-Hue!",
         bridgeip: "192.168.1.2",
-        userid: "yz30VQP0rkQctt2ZKve-Aqa-NOCJqKRw35KGgh1K",
+        userid: "",
         lightsorgroups: "groups",
-        updateInterval: 60 * 100, // updates every 10 minutes
+        updateInterval: 60 * 10000, // updates every 10 minutes
         animationSpeed: 2 * 1000,
         initialLoadDelay: 0
 
@@ -29,6 +29,7 @@ Module.register("MMM-Hue", {
     },
     // Define start sequence.
     start: function () {
+        
         var result = false;
         var url = "http://" + this.config.bridgeip + "/api/" + this.config.userid + "/" + this.config.lightsorgroups;
         this.getData();
@@ -40,26 +41,35 @@ Module.register("MMM-Hue", {
     // Override dom generator.
     getDom: function () {
         var wrapper = document.createElement("div");
-        //var header = document.createElement("header");
-        //header.classList.add("align-left");
-        //var logo = document.createElement("i");
-        //logo.classList.add("fa", "fa-lightbulb-o", "logo");
-        //header.appendChild(logo);
-        //var name = document.createElement("span");
-        //name.innerHTML = this.translate("Hue Status");
-        //header.appendChild(name);
-        //wrapper.appendChild(header);
 
+    
         if (this.result) {
+
             var table = document.createElement("table");
-            
-            for (var i = 0; i < this.result.length; i++) {
-                alert(i.toString);
+            table.classList.add("small", "table", "align-left");
+
+            table.appendChild(this.createLabelRow());
+
+            var lamps = Object.keys(this.result);
+
+            for (var i = 0; i < lamps.length; i++) {
                 var row = document.createElement("tr");
-                var name = document.createElement("td");
-                name.innerHTML = this.result[i].name;
-                row.appendChild(name);
+
+                var room = document.createElement("td");
+                room.innerHTML = this.result[lamps[i]].name;;
+                row.appendChild(room);
+                //alert(this.result[lamps[i]].state.all_on ? "fa-lightbulb-o fa-lightbulb-o-all-on" : this.result[lamps[i]].state.all_on ? "fa-lightbulb-o" : "fa-times");
+                var lightsall = document.createElement("td");
+                lightsall.classList.add("fa", this.result[lamps[i]].state.all_on ? "fa-lightbulb-o" : "fa-times");
+                row.appendChild(lightsall);
+
+                var lightsany = document.createElement("td");
+                lightsany.classList.add("fa", this.result[lamps[i]].state.any_on ? "fa-lightbulb-o" : "fa-times");
+
+                row.appendChild(lightsany);
+
                 table.appendChild(row);
+                
             }
             wrapper.appendChild(table);
         } else {
@@ -67,6 +77,36 @@ Module.register("MMM-Hue", {
         }
         return wrapper;
     },
+
+    createLabelRow: function () {
+        var labelRow = document.createElement("tr");
+
+        var roomiconlabel = document.createElement("th");
+        roomiconlabel.classList.add("centered");
+        var typeIcon = document.createElement("room");
+        typeIcon.classList.add("fa", "fa-home");
+        roomiconlabel.appendChild(typeIcon);
+        labelRow.appendChild(roomiconlabel);
+
+        var lightsonlabel = document.createElement("th");
+        lightsonlabel.classList.add("centered");
+        var typeIcon = document.createElement("lightson");
+        //typeIcon.classList.add("fa", "fa-lightbulb-o");
+        typeIcon.innerHTML = "All";
+        lightsonlabel.appendChild(typeIcon);
+        labelRow.appendChild(lightsonlabel);
+
+        var lightsonlabel = document.createElement("th");
+        lightsonlabel.classList.add("centered");
+        var typeIcon = document.createElement("lightson");
+        //typeIcon.classList.add("fa", "fa-lightbulb-o");
+        typeIcon.innerHTML = "Any";
+        lightsonlabel.appendChild(typeIcon);
+        labelRow.appendChild(lightsonlabel);
+
+        return labelRow;
+    }
+,
 //"http://" + this.config.bridgeip + "/api/" + this.config.userid + "/" + this.config.lightsorgroups
     getData: function () {
         $.getJSON("http://" + this.config.bridgeip + "/api/" + this.config.userid + "/" + this.config.lightsorgroups, (data) => {
