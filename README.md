@@ -1,5 +1,8 @@
 # Module: MMM-Hue
 The `MMM-Hue` module is a third party module for MagicMirror. It is a simple way to display the status of groups or lights in your Philips Hue setup.
+
+##Installing the Module
+Navigate into your MagicMirror's modules folder and execute git clone https://github.com/MitchSS/MMM-Hue.git.
 ## Using the module
 
 To use this module, add it to the modules array in the `config/config.js` file:
