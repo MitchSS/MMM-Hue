@@ -23,10 +23,15 @@ The following properties can be configured:
 	<tbody>
 
 		<tr>
-			<td><code></code></td>
-			<td>.<br>
-				
+			<td><code>bridgeip</code></td>
+			<td>The ip address of your Philips Hue Bridge.
 			</td>
 		</tr>
+		<tr>
+			<td><code>userid</code></td>
+			<td>This is the user id created to access your Philips Hue Bridge.<br> See here for more details - http://www.developers.meethue.com/documentation/getting-started
+			</td>
+		</tr>
+
 	</tbody>
 </table>

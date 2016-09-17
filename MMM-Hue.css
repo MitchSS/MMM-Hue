@@ -1,0 +1,11 @@
+.MMM-Hue .centered {
+    text-align: center;
+}
+
+.MMM-Hue .lights-all-on{
+   color: yellow
+}
+
+.MMM-Hue .lights-partial-on{
+   color: khaki
+}
