@@ -4,7 +4,12 @@ The `MMM-Hue` module is a third party module for MagicMirror. It is a simple way
 
 To use this module, add it to the modules array in the `config/config.js` file:
 ````javascript
-
+{
+		    module: 'MMM-Hue',
+		    position: 'top_right',
+		    config:{bridgeip: "192.168.1.1",
+		        userid: "my user id"}
+		}
 ````
 
 ## Configuration options
