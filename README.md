@@ -12,7 +12,8 @@ To use this module, add it to the modules array in the `config/config.js` file:
 		    module: 'MMM-Hue',
 		    position: 'top_right',
 		    config:{bridgeip: "192.168.1.1",
-		        userid: "my user id"}
+		        userid: "my user id"
+				,colour: false}
 		}
 ````
 
@@ -39,6 +40,11 @@ The following properties can be configured:
 		<tr>
 			<td><code>userid</code></td>
 			<td>This is the user id created to access your Philips Hue Bridge.<br> See here for more details - http://www.developers.meethue.com/documentation/getting-started
+			</td>
+		</tr>
+		<tr>
+			<td><code>colour</code></td>
+			<td>This boolean determines whether the icons should be displayed in colour when the lights are on in a given room. 
 			</td>
 		</tr>
 

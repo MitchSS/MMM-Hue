@@ -12,7 +12,8 @@ Module.register("MMM-Hue", {
     // Default module config.
     defaults: {
         bridgeip: "",
-        userid: ""
+        userid: "",
+        colour: false
 
     },
     // Define required scripts.
@@ -64,12 +65,15 @@ Module.register("MMM-Hue", {
 
                 var lightstatus = document.createElement("i");
                 lightstatus.classList.add("fa", this.result[lamps[i]].state.all_on ? "fa-lightbulb-o" : (this.result[lamps[i]].state.any_on ? "fa-adjust" : "fa-times"));
-                if (this.result[lamps[i]].state.all_on) {
-                    lightstatus.classList.add("lights-all-on")
-                }
-                else {
-                    if (this.result[lamps[i]].state.any_on) {
-                        lightstatus.classList.add("lights-partial-on")
+                if (this.config.colour) {
+
+                    if (this.result[lamps[i]].state.all_on) {
+                        lightstatus.classList.add("lights-all-on")
+                    }
+                    else {
+                        if (this.result[lamps[i]].state.any_on) {
+                            lightstatus.classList.add("lights-partial-on")
+                        }
                     }
                 }
                 ;
