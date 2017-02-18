@@ -13,7 +13,12 @@ Module.register("MMM-Hue", {
     defaults: {
         bridgeip: "",
         userid: "",
-        colour: false
+        colour: false,
+        refreshTime: 60 * 10000,
+        lightsorgroups: "groups",
+        showOnlyOn: false,
+        hideSpecificGroups: false,
+        hideGroupsWithString: 'hgrp'
 
     },
     // Define required scripts.
@@ -27,8 +32,8 @@ Module.register("MMM-Hue", {
     // Define start sequence.
     start: function () {
         //These will be moved to config in a later release
-        this.lightsorgroups = "groups";
-        this.updateInterval = 60 * 10000; // updates every 10 minutes
+        this.lightsorgroups = this.config.lightsorgroups;
+        this.updateInterval = this.config.refreshTime; // updates every 10 minutes
         this.animationSpeed = 2 * 1000;
         this.initialLoadDelay = 0;
         //end
@@ -55,33 +60,53 @@ Module.register("MMM-Hue", {
             var lamps = Object.keys(this.result);
 
             for (var i = 0; i < lamps.length; i++) {
+                var groupName = this.result[lamps[i]].name;
+                console.debug(groupName, groupName.includes('hgrp'));
 
+                if (this.config.showOnlyOn) {
+                    if (this.config.hideSpecificGroups && !groupName.includes(this.config.hideGroupsWithString)) {
+                        if (this.result[lamps[i]].state.all_on || this.result[lamps[i]].state.any_on) {
+                            domAction(this.result,lamps[i],this.config);
+                        }
+                    } else if (!this.config.hideSpecificGroups) {
+                        domAction(this.result,lamps[i],this.config);
+                    }
+                } else {
+                    if (this.config.hideSpecificGroups && !groupName.includes(this.config.hideGroupsWithString)) {
+                        domAction(this.result,lamps[i],this.config);
+                    } else if (!this.config.hideSpecificGroups) {
+                        domAction(this.result,lamps[i],this.config);
+                    }
+                }
+
+
+            }
+
+            function domAction(result, lamp, config) {
                 var row = document.createElement("tr");
                 var room = document.createElement("td");
-                room.innerHTML = this.result[lamps[i]].name;;
+                console.debug(result[lamp]);
+                room.innerHTML = result[lamp].name;
                 row.appendChild(room);
                 var lightsallLabel = document.createElement("td");
                 lightsallLabel.classList.add("centered");
 
                 var lightstatus = document.createElement("i");
-                lightstatus.classList.add("fa", this.result[lamps[i]].state.all_on ? "fa-lightbulb-o" : (this.result[lamps[i]].state.any_on ? "fa-adjust" : "fa-times"));
-                if (this.config.colour) {
+                lightstatus.classList.add("fa", result[lamp].state.all_on ? "fa-lightbulb-o" : (result[lamp].state.any_on ? "fa-adjust" : "fa-times"));
+                if (config.colour) {
 
-                    if (this.result[lamps[i]].state.all_on) {
+                    if (result[lamp].state.all_on) {
                         lightstatus.classList.add("lights-all-on")
                     }
                     else {
-                        if (this.result[lamps[i]].state.any_on) {
+                        if (result[lamp].state.any_on) {
                             lightstatus.classList.add("lights-partial-on")
                         }
                     }
                 }
-                ;
                 lightsallLabel.appendChild(lightstatus);
                 row.appendChild(lightsallLabel);
-
                 table.appendChild(row);
-
             }
             wrapper.appendChild(table);
         } else {
@@ -91,7 +116,7 @@ Module.register("MMM-Hue", {
     },
 
     createLabelRow: function () {
-        
+
         var labelRow = document.createElement("tr");
 
         var roomiconlabel = document.createElement("th");
