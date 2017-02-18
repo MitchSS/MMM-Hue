@@ -11,9 +11,11 @@ To use this module, add it to the modules array in the `config/config.js` file:
 {
 		    module: 'MMM-Hue',
 		    position: 'top_right',
-		    config:{bridgeip: "192.168.1.1",
-		        userid: "my user id"
-				,colour: false}
+		    config:{
+                bridgeip: "192.168.1.1",
+		        userid: "my user id",
+                colour: false
+            }
 		}
 ````
 
@@ -44,7 +46,32 @@ The following properties can be configured:
 		</tr>
 		<tr>
 			<td><code>colour</code></td>
-			<td>This boolean determines whether the icons should be displayed in colour when the lights are on in a given room. 
+			<td>This boolean determines whether the icons should be displayed in colour when the lights are on in a given room.
+			</td>
+		</tr>
+        <tr>
+			<td><code>refreshTime</code></td>
+			<td>How often should the lamp states refreshed</br> Default: 60 * 10000
+			</td>
+		</tr>
+        <tr>
+			<td><code>lightsorgroups</code></td>
+			<td>Should the module show groups or lights</br> Default: "groups"
+			</td>
+		</tr>
+        <tr>
+			<td><code>showOnlyOn</code></td>
+			<td>If set to true the module shows only the lights which are on</br> Default: false
+			</td>
+		</tr>
+        <tr>
+			<td><code>hideSpecificGroups</code></td>
+			<td>Ignore some groups by a given string (requires hideGroupsWithString option)</br> Default: false
+			</td>
+		</tr>
+        <tr>
+			<td><code>hideGroupsWithString</code></td>
+			<td>Ignore some groups which including this string (requires hideSpecificGroups option)
 			</td>
 		</tr>
 
