@@ -31,7 +31,7 @@ The following properties can be configured:
 			<th>Option</th>
 			<th width="100%">Description</th>
 		</tr>
-	<thead>
+	</thead>
 	<tbody>
 
 		<tr>
