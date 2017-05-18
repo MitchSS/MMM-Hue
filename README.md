@@ -18,6 +18,7 @@ To use this module, add it to the modules array in the `config/config.js` file:
             }
 		}
 ````
+Please visit [Philips Hue API page](https://www.developers.meethue.com/documentation/getting-started) to get an userid.
 
 ## Configuration options
 
@@ -49,31 +50,35 @@ The following properties can be configured:
 			<td>This boolean determines whether the icons should be displayed in colour when the lights are on in a given room.
 			</td>
 		</tr>
-        <tr>
+		<tr>
 			<td><code>refreshTime</code></td>
 			<td>How often should the lamp states refreshed</br> Default: 60 * 10000
 			</td>
 		</tr>
-        <tr>
+		<tr>
 			<td><code>lightsorgroups</code></td>
 			<td>Should the module show groups or lights</br> Default: "groups"
 			</td>
 		</tr>
-        <tr>
+		<tr>
 			<td><code>showOnlyOn</code></td>
 			<td>If set to true the module shows only the lights which are on</br> Default: false
 			</td>
 		</tr>
-        <tr>
+		<tr>
 			<td><code>hideSpecificGroups</code></td>
 			<td>Ignore some groups by a given string (requires hideGroupsWithString option)</br> Default: false
 			</td>
 		</tr>
-        <tr>
+		<tr>
 			<td><code>hideGroupsWithString</code></td>
 			<td>Ignore some groups which including this string (requires hideSpecificGroups option)
 			</td>
 		</tr>
-
+		<tr>
+			<td><code>showLabel</code></td>
+			<td>Show header label?</br> Default: true
+			</td>
+		</tr>
 	</tbody>
 </table>
