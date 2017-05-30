@@ -17,6 +17,7 @@ Module.register("MMM-Hue", {
         refreshTime: 60 * 10000,
         lightsorgroups: "groups",
         showOnlyOn: false,
+        showLabel: true,
         hideSpecificGroups: false,
         hideGroupsWithString: 'hgrp'
 
@@ -28,6 +29,13 @@ Module.register("MMM-Hue", {
     getStyles: function () {
 
         return ["font-awesome.css", "MMM-Hue.css"];
+    },
+    // Define required translations.
+    getTranslations: function() {
+      return {
+        'en': 'translations/en.json',
+        'id': 'translations/id.json'
+      };
     },
     // Define start sequence.
     start: function () {
@@ -55,7 +63,8 @@ Module.register("MMM-Hue", {
             var table = document.createElement("table");
             table.classList.add("small", "table", "align-left");
 
-            table.appendChild(this.createLabelRow());
+            if (this.config.showLabel)
+              table.appendChild(this.createLabelRow());
 
             var lamps = Object.keys(this.result);
 
@@ -110,7 +119,8 @@ Module.register("MMM-Hue", {
             }
             wrapper.appendChild(table);
         } else {
-            wrapper.innerHTML = "No Data returned";
+            wrapper.innerHTML = this.translate("NO_DATA");
+            wrapper.className = "dimmed light small";
         }
         return wrapper;
     },
@@ -129,7 +139,7 @@ Module.register("MMM-Hue", {
         lightsonlabel.classList.add("centered");
         var typeIcon = document.createElement("lightson");
         //typeIcon.classList.add("fa", "fa-lightbulb-o");
-        typeIcon.innerHTML = "Lights On";
+        typeIcon.innerHTML = this.translate("LIGHTS_ON");
         lightsonlabel.appendChild(typeIcon);
         labelRow.appendChild(lightsonlabel);
 
