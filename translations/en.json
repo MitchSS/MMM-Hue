@@ -1,4 +1,9 @@
 {
 	"LIGHTS_ON": "Lights On",
-	"NO_DATA": "No Data returned"
+	"NO_DATA": "No Data returned",
+	"TXT_HUE": "PHILIPS HUE STATUS",
+	"TXT_HUE_DESC": "display all room status of installed philips hue",
+	"TXT_HUE_ON": "ON",
+	"TXT_HUE_ON_PARTIAL": "ON (partially)",
+	"TXT_HUE_OFF": "OFF"
 }
