@@ -1,4 +1,9 @@
 {
 	"LIGHTS_ON": "Nyala",
-	"NO_DATA": "Tidak ada data"
+	"NO_DATA": "Tidak ada data",
+	"TXT_HUE": "STATUS PHILIPS HUE",
+	"TXT_HUE_DESC": "menampilkan semua status (ruangan/lampu) philips hue terpasang",
+	"TXT_HUE_ON": "NYALA",
+	"TXT_HUE_ON_PARTIAL": "NYALA (sebagian)",
+	"TXT_HUE_OFF": "PADAM"
 }
