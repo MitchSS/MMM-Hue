@@ -34,7 +34,8 @@ Module.register("MMM-Hue", {
     getTranslations: function() {
       return {
         'en': 'translations/en.json',
-        'id': 'translations/id.json'
+        'id': 'translations/id.json',
+        'sv': 'translations/sv.json',
       };
     },
     // Define start sequence.
