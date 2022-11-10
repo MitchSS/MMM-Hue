@@ -58,7 +58,7 @@ Module.register("MMM-Hue", {
     getDom: function () {
         var wrapper = document.createElement("div");
         //alert("http://" + this.config.bridgeip + "/api/" + this.config.userid + "/" + this.config.lightsorgroups);
-
+	Log.info(JSON.stringify(this.result));
         if (this.result) {
 
             var table = document.createElement("table");
@@ -75,7 +75,7 @@ Module.register("MMM-Hue", {
 
                 if (this.config.showOnlyOn) {
                     if (this.config.hideSpecificGroups && !groupName.includes(this.config.hideGroupsWithString)) {
-                        if (this.result[lamps[i]].state.all_on || this.result[lamps[i]].state.any_on) {
+                        if (this.result[lamps[i]].state.all_on || this.result[lamps[i]].state.any_on || this.result[lamps[i]].state.on) {
                             domAction(this.result,lamps[i],this.config);
                         }
                     } else if (!this.config.hideSpecificGroups) {
@@ -102,10 +102,10 @@ Module.register("MMM-Hue", {
                 lightsallLabel.classList.add("centered");
 
                 var lightstatus = document.createElement("i");
-                lightstatus.classList.add("fa", result[lamp].state.all_on ? "fa-lightbulb-o" : (result[lamp].state.any_on ? "fa-adjust" : "fa-times"));
+                lightstatus.classList.add("fa", (result[lamp].state.all_on || result[lamp].state.on) ? "fa-lightbulb-o" : (result[lamp].state.any_on ? "fa-adjust" : "fa-times"));
                 if (config.colour) {
 
-                    if (result[lamp].state.all_on) {
+                    if (result[lamp].state.all_on||result[lamp].state.on) {
                         lightstatus.classList.add("lights-all-on")
                     }
                     else {
